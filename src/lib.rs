@@ -109,6 +109,19 @@ use miniquad as mq;
 #[cfg(target_os = "macos")] // https://github.com/not-fl3/miniquad/issues/172
 use copypasta::ClipboardProvider;
 
+static mut SCROLL_COEFFICIENT: f32 = 1.0;
+
+pub fn set_scroll_coefficient(new_val: f32) {
+    unsafe {
+        SCROLL_COEFFICIENT = new_val;
+    }
+}
+
+pub fn get_scroll_coefficient() -> f32 {
+    unsafe { SCROLL_COEFFICIENT }
+}
+
+
 /// egui bindings for miniquad.
 ///
 ///
@@ -204,7 +217,7 @@ impl EguiMq {
             // Treat as zoom instead:
             egui::Event::Zoom((delta.y / 200.0).exp())
         } else {
-            egui::Event::Scroll(delta)
+            egui::Event::Scroll(delta * get_scroll_coefficient())
         };
         self.egui_input.events.push(event);
     }

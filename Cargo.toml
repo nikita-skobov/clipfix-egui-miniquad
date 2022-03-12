@@ -20,7 +20,7 @@ include = [
 
 [dependencies]
 bytemuck = "1.7"
-egui = { version = "0.16.0", features = ["convert_bytemuck"] }
+egui = { git = "https://github.com/nikita-skobov/egui", branch = "v0.16.fork", features = ["convert_bytemuck"] }
 miniquad = { git = "https://github.com/nikita-skobov/clipfix-miniquad" }
 quad-url = "0.1.0"
 
